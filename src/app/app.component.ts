@@ -24,4 +24,12 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.paginatorService.getPhotos();
     }
+
+    nextPage() {
+        this.paginatorService.nextPage();
+    }
+
+    previousPage() {
+        this.paginatorService.previousPage();
+    }
 }

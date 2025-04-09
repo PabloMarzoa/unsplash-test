@@ -1,2 +1,4 @@
 
 <app-photo-grid [photos]="paginatorService.photosPageCollection()"></app-photo-grid>
+<button (click)="previousPage()" [disabled]="paginatorService.actualPage() < 2">Previous Page</button>
+<button (click)="nextPage()">Next Page</button>
