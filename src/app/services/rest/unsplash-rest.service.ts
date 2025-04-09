@@ -7,8 +7,9 @@ import {IPhoto} from '../../models/photo';
 export class UnsplashRestService {
   private accessKey = 'Client-ID d0IoCpSrR1SMMiKH0ZReNGy8CjNdTLfGcbJRsXDFDyc'; // Only for test projects
   private httpService = inject(HttpClient);
-  public getPhotos(): Observable<IPhoto[]> {
-      return this.httpService.get<IPhoto[]>('https://api.unsplash.com/photos', {headers: this.setHttpHeaders()})
+
+  public getPhotos(page: number = 1, perPage: number = 10): Observable<IPhoto[]> {
+      return this.httpService.get<IPhoto[]>(`https://api.unsplash.com/photos?page=${page}&per_page=${perPage}`, {headers: this.setHttpHeaders()})
           .pipe(catchError(error => this.handleError(error)));
   }
 

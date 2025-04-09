@@ -1,30 +1,27 @@
-import {Component, inject} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, inject, OnInit} from '@angular/core';
 import {UnsplashRestService} from './services/rest/unsplash-rest.service';
 import {HttpClientModule} from '@angular/common/http';
-import {IPhoto} from './models/photo';
+import {PhotoGridComponent} from './components/photo-grid/photo-grid.component';
+import {PaginatorService} from './services/paginator.service';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     imports: [
-        RouterOutlet,
-        HttpClientModule
+        HttpClientModule,
+        PhotoGridComponent
     ],
     providers: [
-        UnsplashRestService
+        UnsplashRestService,
+        PaginatorService
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
-export class AppComponent {
-    private unsplashRestService: UnsplashRestService = inject(UnsplashRestService);
-    photosCollection: IPhoto[] = [];
+export class AppComponent implements OnInit {
+    paginatorService: PaginatorService = inject(PaginatorService);
 
-    onGetAllPhotos(): void {
-        this.unsplashRestService.getPhotos().subscribe((res: IPhoto[]) => {
-            console.log('test-res', res);
-            this.photosCollection = res;
-        })
+    ngOnInit() {
+        this.paginatorService.getPhotos();
     }
 }

@@ -1,0 +1,5 @@
+<section>
+    @for(photo of photos; track photo.id) {
+        <div class="photo-box" style="background-image: url({{photo.urls.small}});"></div>
+    }
+</section>
